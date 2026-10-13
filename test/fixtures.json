@@ -1,0 +1,42 @@
+{
+  "entities": [
+    {
+      "identifier": "fixture-requirements",
+      "blueprint": "product_opportunity",
+      "title": "TEST FIXTURE - audit-log export",
+      "properties": {
+        "status": "Requirements Review",
+        "requirements": "## Customer needs\n- Schedule audit-log exports.\n- Choose an export destination and retention period.",
+        "acceptance_criteria": "Exports run on the selected schedule and failures remain visible.",
+        "evidence_summary": "Three customer signals suggest a recurring need for scheduled exports. This is agent interpretation, not original source text.",
+        "open_questions": ["Which destinations should be supported?", "What is the required retention period?"],
+        "confidence": 72
+      },
+      "relations": { "signals": ["fixture-signal-1", "fixture-signal-2", "fixture-signal-3"], "ado_work_items": ["fixture-ado-11"] }
+    },
+    {
+      "identifier": "fixture-engineering",
+      "blueprint": "product_opportunity",
+      "title": "TEST FIXTURE - configuration restore",
+      "properties": {
+        "status": "Engineering Review",
+        "prd": "## Product scope\nRestore a prior workspace configuration.",
+        "engineering_plan_proposal": "## Working engineering plan\nValidate a snapshot before applying changes.",
+        "acceptance_criteria": "A failed restore leaves the workspace unchanged.",
+        "open_questions": ["Who can authorize a restore?"]
+      },
+      "relations": {}
+    },
+    {
+      "identifier": "fixture-ready",
+      "blueprint": "product_opportunity",
+      "title": "TEST FIXTURE - ready",
+      "properties": { "status": "Ready for Engineering", "prd": "Reviewed product scope", "engineering_plan": "Reviewed plan" },
+      "relations": {}
+    },
+    { "identifier": "fixture-signal-1", "blueprint": "signal", "title": "Slack request for scheduling", "properties": { "source_system": "slack", "original_text": "Can we schedule audit exports?", "agent_reasoning": "A scheduling need may exist." }, "relations": {} },
+    { "identifier": "fixture-signal-2", "blueprint": "signal", "title": "Slack request for destination", "properties": { "source_system": "slack", "original_text": "We need our own export destination." }, "relations": {} },
+    { "identifier": "fixture-signal-3", "blueprint": "signal", "title": "Zendesk export question", "properties": { "source_system": "zendesk", "original_text": "What retention period can we configure?" }, "relations": {} },
+    { "identifier": "fixture-ado-11", "blueprint": "azureDevopsWorkItem", "title": "Adjacent audit metadata context", "properties": {}, "relations": {} }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "pluginId": "product-opportunity-lifecycle",
+  "version": "0.1.3",
+  "typecheck": "passed",
+  "modelAndApiTests": { "passed": 17, "failed": 0 },
+  "productionBundleScenarios": {
+    "passed": 6,
+    "coverage": [
+      "Read-only stage inspection, original evidence, adjacent ADO and supported links",
+      "Permission failure, preserved stale state, refresh-in-progress and retry",
+      "Cross-entity isolation, late response races, review links and timer cleanup",
+      "Handoff remains pending; exact SDK dialog payload without execution",
+      "Safe markdown, disabled remote images and unsafe URLs",
+      "Polling, token revocation and no runtime errors"
+    ]
+  },
+  "browserChecks": {
+    "dataSource": "Labelled local read-only capture of live Port entities; not a signed-in portal session",
+    "referenceStage": "Requirements review",
+    "referenceSignalCount": 3,
+    "referenceQuestions": 7,
+    "adjacentAdoItem": "11 - related context only",
+    "referenceDesktop": { "iframeWidthPx": 837, "totalPanelHeightPx": 316.97, "horizontalOverflow": false },
+    "engineeringDesktop": { "iframeWidthPx": 837, "totalPanelHeightPx": 350.91, "horizontalOverflow": false, "consistencyWarningShown": true },
+    "narrow": { "iframeWidthPx": 390, "horizontalOverflow": false },
+    "keyboardEnterAndVisibleFocus": "passed",
+    "lightAndDarkThemes": "checked",
+    "nativeTypographyVerification": {
+      "signedInPortReferenceEntity": "passed",
+      "bodyFontSize": "14px",
+      "headingFontSize": "16px",
+      "headingWeight": "500",
+      "nestedCardBorder": "removed",
+      "iframeWidthPx": 602,
+      "contentHeightPx": 340,
+      "iframeHeightPx": 505,
+      "horizontalOverflow": false,
+      "fontRequests": 0,
+      "interLoaded": true,
+      "dmSansLoaded": true,
+      "fontSource": "Bundled binary bytes registered with FontFace; zero URL requests",
+      "connectorGapPx": 3,
+      "narrowConnectorGapPx": 3,
+      "narrowHorizontalOverflow": false,
+      "copy": "Only stage explanation, artifact availability, action, expandable questions and required warnings"
+    },
+    "themeRegression": {
+      "nativeDmSans": {
+        "bodySizePx": 15,
+        "headingSizePx": 17,
+        "secondarySizePx": 13,
+        "referenceContentHeightPx": 348.13,
+        "desktopAnd390pxOverflow": false,
+        "actualRenderedGlyphFamily": "DM Sans 9pt",
+        "bodyWeight": 400,
+        "headingWeight": 500,
+        "opticalSize": 9,
+        "stageDetailsAndRefresh": "passed in signed-in Port",
+        "screenshot": "screenshots/native-port-dm-sans.png"
+      },
+      "nativeSurfaceColorCorrection": {
+        "signedInReferenceEntity": "passed",
+        "pluginAndNativeBackground": "#1e1c25",
+        "currentStageAccent": "#447cea",
+        "iframeWidthPx": 831,
+        "horizontalOverflow": false,
+        "lightSurfaceTokenSwitch": "passed: #ffffff",
+        "darkSurfaceTokenSwitch": "passed: #1e1c25",
+        "screenshot": "screenshots/native-port-theme-colors.png"
+      },
+      "hostDarkWithMissingSurfaceTokens": "passed: dark surface and light text",
+      "hostLightOverridesDarkSystem": "passed: light surface",
+      "missingHostThemeUsesDarkSystem": "passed: dark surface",
+      "documentedPortTokens": "passed: background-dim, background-dim-transparent and border-medium applied",
+      "hostThemeChangesApplyToDocumentRoot": "passed in production bundle test"
+    }
+  },
+  "deployment": {
+    "uploaded": true,
+    "hostedBuildIdenticalToLocal": true,
+    "sha256": "199f062c495d039af8a06f6eb0b4064892e5549d8cdc5e732046b3dd14ee53d2",
+    "firstOverviewRowVerifiedViaAuthenticatedApi": true,
+    "allNonOverviewGroupsUnchanged": true,
+    "opportunityPropertiesAndRelationsUnchanged": true,
+    "all14WorkflowsUnchanged": true,
+    "signedInPortalBrowserVerification": "Reference entity rendering, live data, dark theme, loaded Inter/DM Sans and nonintersecting connectors verified in signed-in Port for version 0.1.3. Second entity and native action navigation not re-verified.",
+    "redundantWidgets": "Six direct replacements identified; preserved pending signed-in rendering verification"
+  },
+  "rollbackDryRun": "passed; no changes made",
+  "businessWorkflowExecutionsDuringDevelopment": 0,
+  "knownLimitations": [
+    "Port dashboard rows have a 400px minimum, independent of compact panel content.",
+    "Approved has no meaning assigned by the inspected workflows.",
+    "Generation populates approved-artifact fields; field presence is not approval.",
+    "No dedicated handoff provenance can verify created work items from current entity data.",
+    "Native Port host rendering and navigation need signed-in acceptance before retiring old widgets."
+  ]
+}

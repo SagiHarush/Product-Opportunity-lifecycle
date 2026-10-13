@@ -1,0 +1,9 @@
+node_modules/
+rollback/
+preview-live/
+screenshots/
+.port/
+*.zip
+.env
+.env.*
+!.env.example

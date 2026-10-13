@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opportunity lifecycle preview</title>
+<style>body{font:14px "Segoe UI",system-ui,sans-serif;margin:0;background:#f4f6f9;color:#172c40}header{padding:16px 24px;background:#fff;border-bottom:1px solid #dce5ed}h1{font-size:18px;margin:0 0 6px}.mode{font-size:11px;color:#8b5b15;margin:6px 0 12px}select{max-width:100%;padding:7px;border-radius:5px;border:1px solid #bdcbd8}iframe{display:block;width:100%;height:1100px;border:0;background:#fff}#frame{max-width:1200px;margin:20px auto}#event{font-size:12px;padding:8px 24px;color:#52687c}a{color:#2468b4}</style></head>
+<body><header><h1>Product Opportunity lifecycle</h1><p class="mode">__MODE__</p><label for="opportunity">Opportunity </label><select id="opportunity">__OPTIONS__</select><p>This preview uses the production bundle and Port SDK host messages. Navigation is recorded below; no business workflow can execute.</p></header><div id="frame"><iframe title="Lifecycle plugin preview" src="/plugin"></iframe></div><p id="event" role="status">No navigation requested.</p>
+<script>
+const frame = document.querySelector("iframe"), select = document.querySelector("select");
+async function context() {
+  const identifier = decodeURIComponent(select.value);
+  const response = await fetch("/record?blueprint=product_opportunity&identifier=" + encodeURIComponent(identifier));
+  const {entity} = await response.json();
+  frame.contentWindow.postMessage({type:"PLUGIN_DATA",baseUrl:"https://api.port.io",entity,params:{},theme:{mode:"light",css:":root{--text-high:#172c40;--text-medium:#52687c;--background-dim:#fff;--background-dim-transparent:#f5f8fb;--border-medium:#dce5ed}"}},location.origin);
+  frame.contentWindow.postMessage({type:"PORT_TOKEN",token:"preview-only-not-a-credential"},location.origin);
+}
+frame.addEventListener("load", () => {
+  frame.contentWindow.fetch = async (input, init) => {
+    const url = new URL(String(input));
+    const parts = url.pathname.split("/");
+    if (init?.method && init.method !== "GET") throw new Error("Preview blocks all write requests.");
+    const response = await fetch("/record?blueprint=" + encodeURIComponent(decodeURIComponent(parts[3])) + "&identifier=" + encodeURIComponent(decodeURIComponent(parts[5])), {signal:init?.signal});
+    return response;
+  };
+  context();
+});
+select.addEventListener("change", context);
+window.addEventListener("message", event => {
+  if(event.source !== frame.contentWindow) return;
+  if(event.data.type === "REQUEST_PORT_TOKEN") context();
+  if(event.data.type === "OPEN_URL" || event.data.type === "SHOW_RUN_WORKFLOW_DIALOG") document.getElementById("event").textContent = "Navigation request (not executed): " + JSON.stringify(event.data);
+});
+</script></body></html>
